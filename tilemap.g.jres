@@ -100,18 +100,6 @@
         "tilemapTile": true,
         "displayName": "myTile14"
     },
-    "tile17": {
-        "data": "hwQQABAAAAAAADMzMwMAAAAz////PwMAMP//////PwAw////////APP///n//78P8///+f//uw/z//+Zmfm7D/P//////7sP8///mZn5uw/z///5/7+7D/P///n/v7sPMP///7+7+wAw/7+7u7v7AAAzu7u7+w8AAAD///8PAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile15"
-    },
-    "tile18": {
-        "data": "hwQQABAAAAAAADMzMwMAAAAzRERENAMAMERERERENAAwREREREREAENEREVERKQPQ0RERUREqg9DRERVVUWqD0NERERERKoPQ0REVVVFqg9DRERFRKSqD0NEREVEpKoPMERERKSq+gAwRKSqqqr6AAAzqqqq+g8AAAD///8PAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile16"
-    },
     "level1": {
         "id": "level1",
         "mimeType": "application/mkcd-tilemap",
