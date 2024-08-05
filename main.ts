@@ -15,15 +15,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 function blood_insertion () {
     moving.setPosition(91, 53)
     moving.vx = 50
-    for (let index = 0; index < 100; index++) {
-        if (moving.x < 120) {
-            moving.vx = 50
-            pause(1000)
-        }
-        if (moving.x > 30) {
-            moving.vx = -50
-            pause(1000)
-        }
+    if (moving.x > 90) {
+        moving.vx = -50
+    }
+    if (moving.x < 50) {
+        moving.vx = 50
     }
 }
 let random = 0
@@ -95,6 +91,7 @@ forever(function () {
             . . . . . . . f . . . . . . . . 
             . . . . . . . f . . . . . . . . 
             `, SpriteKind.Player)
+        blood_insertion()
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer1, Z_INDEX)
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, img`
             ................................................................................................................................................................
@@ -219,7 +216,6 @@ forever(function () {
             ................................................................................................................................................................
             `)
         Z_INDEX = Z_INDEX - 1
-        blood_insertion()
     }
 })
 forever(function () {
