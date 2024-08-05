@@ -80,7 +80,6 @@ tiles.setCurrentTilemap(tilemap`level6`)
 brain.setPosition(20, 50)
 brain.ay = 500
 forever(function () {
-    pause(10000)
     random = randint(1, 2)
     if (random == 1) {
         if (_1 == 1) {
@@ -364,12 +363,12 @@ forever(function () {
     pause(900)
 })
 forever(function () {
-    if (sec < -100 || sec > 150) {
-        game.gameOver(false)
-    }
-})
-forever(function () {
     pause(1000)
     tiles.setCurrentTilemap(tilemap`level6`)
     sec = sec + 100
+})
+forever(function () {
+    if (sec < -100 || sec > 150) {
+        game.gameOver(false)
+    }
 })
