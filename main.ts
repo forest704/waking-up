@@ -1,6 +1,3 @@
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
         brain.setVelocity(0, -200)
@@ -12,6 +9,9 @@ function drop () {
     moving.vx = 0
     moving.ay = 300
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function blood_insertion () {
     moving.setPosition(91, 53)
     moving.vx = 50
@@ -224,9 +224,9 @@ forever(function () {
     sec = sec + 100
 })
 forever(function () {
-    tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile14`)
+    tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile16`)
     pause(100)
-    tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`transparency16`)
+    tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile15`)
     pause(900)
 })
 forever(function () {
