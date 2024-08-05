@@ -1,4 +1,4 @@
-// Auto-generated code. Do not edit.
+// 自动生成的代码。请勿编辑。
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
@@ -34,6 +34,10 @@ namespace myTiles {
     export const tile15 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile17 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile18 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -456,9 +460,13 @@ namespace myTiles {
             case "tile15":return tile15;
             case "myTile14":
             case "tile16":return tile16;
+            case "myTile15":
+            case "tile17":return tile17;
+            case "myTile16":
+            case "tile18":return tile18;
         }
         return null;
     })
 
 }
-// Auto-generated code. Do not edit.
+// 自动生成的代码。请勿编辑。
