@@ -12,8 +12,12 @@ function drop () {
     moving.vx = 0
     moving.ay = 300
     pause(10)
-    moving.vx = 0
-    moving.vy = 0
+    sprites.destroy(moving, effects.spray, 1000)
+    if (moving.overlapsWith(target)) {
+        moving.ay = 0
+        moving.ax = 0
+        moving.setVelocity(0, 0)
+    }
 }
 function blood_insertion () {
     _1 = 0
@@ -30,6 +34,7 @@ function blood_insertion () {
     }
 }
 let random = 0
+let target: Sprite = null
 let moving: Sprite = null
 let brain: Sprite = null
 let sec = 0
@@ -80,6 +85,7 @@ tiles.setCurrentTilemap(tilemap`level6`)
 brain.setPosition(20, 50)
 brain.ay = 500
 forever(function () {
+    pause(5000)
     random = randint(1, 2)
     if (random == 1) {
         if (_1 == 1) {
@@ -101,6 +107,25 @@ forever(function () {
                 . . . . . . . f . . . . . . . . 
                 . . . . . . . f . . . . . . . . 
                 `, SpriteKind.Player)
+            target = sprites.create(img`
+                3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+                3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+                3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.Player)
+            target.setPosition(116, 96)
             scroller.setLayerZIndex(scroller.BackgroundLayer.Layer1, Z_INDEX)
             scroller.setLayerImage(scroller.BackgroundLayer.Layer0, img`
                 ................................................................................................................................................................
