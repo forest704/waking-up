@@ -1,6 +1,3 @@
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
         brain.setVelocity(0, -200)
@@ -12,6 +9,9 @@ function drop () {
     moving.ay = 300
     moving.vx = 0
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function blood_insertion () {
     moving.setPosition(91, 53)
     for (let index = 0; index < 4; index++) {
