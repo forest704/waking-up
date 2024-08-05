@@ -1,3 +1,6 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
         brain.setVelocity(0, -200)
@@ -6,18 +9,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function drop () {
-    moving.ay = 300
     moving.vx = 0
+    moving.ay = 300
 }
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function blood_insertion () {
     moving.setPosition(91, 53)
-    for (let index = 0; index < 4; index++) {
-        moving.vx = 50
-        pause(500)
+    moving.vx = 50
+    if (moving.x > 90) {
         moving.vx = -50
+    }
+    if (moving.x < 50) {
+        moving.vx = 50
     }
 }
 let random = 0
@@ -72,19 +74,19 @@ forever(function () {
     random = randint(1, 2)
     if (random == 1) {
         moving = sprites.create(img`
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . . . f . . f f . . . . . . 
-            . . . . . f . . . f . . . . . . 
-            . . . . . f . . . f . . . . . . 
-            . . . . . f f . . f . . . . . . 
-            . . . . . f f . . f . . . . . . 
-            . . . . . f f . . f . . . . . . 
-            . . . . . f f f . f . . . . . . 
-            . . . . . f f f . f . . . . . . 
-            . . . . . f f f f f . . . . . . 
+            . . . . . . . 4 . . . . . . . . 
+            . . . . . . . 4 4 . . . . . . . 
+            . . . . 4 4 4 4 4 4 4 . . . . . 
+            . . . . 4 4 4 4 4 4 4 . . . . . 
+            . . . . . 3 4 4 4 4 . . . . . . 
+            . . . . . 3 4 4 4 4 . . . . . . 
+            . . . . . 3 4 4 4 4 . . . . . . 
+            . . . . . 3 3 4 4 4 . . . . . . 
+            . . . . . f f 4 4 4 . . . . . . 
+            . . . . . f f 4 4 4 . . . . . . 
+            . . . . . f f f 4 4 . . . . . . 
+            . . . . . f f f 4 4 . . . . . . 
+            . . . . . f f f f 4 . . . . . . 
             . . . . . . f f f . . . . . . . 
             . . . . . . . f . . . . . . . . 
             . . . . . . . f . . . . . . . . 
