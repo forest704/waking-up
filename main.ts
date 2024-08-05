@@ -15,11 +15,11 @@ function drop () {
 function blood_insertion () {
     moving.setPosition(91, 53)
     for (let index = 0; index < 100; index++) {
-        if (moving.x < 120) {
+        if (moving.x < 100) {
             moving.vx = 50
             pause(1000)
         }
-        if (moving.x > 120) {
+        if (moving.x > 100) {
             moving.vx = -50
             pause(1000)
         }
@@ -233,7 +233,5 @@ forever(function () {
     pause(900)
 })
 forever(function () {
-    if (sec < -100 || sec > 150) {
-        game.gameOver(false)
-    }
+	
 })
