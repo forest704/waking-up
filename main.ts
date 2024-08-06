@@ -1,3 +1,6 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
         brain.setVelocity(0, -200)
@@ -16,9 +19,6 @@ function drop () {
         moving.setVelocity(0, 0)
     }
 }
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function blood_insertion () {
     _1 = 0
     moving.setPosition(91, 53)
@@ -41,7 +41,7 @@ let sec = 0
 let _1 = 0
 _1 = 1
 music.play(music.createSong(assets.song`bgm`), music.PlaybackMode.LoopingInBackground)
-sec = 0
+sec = 50
 let Z_INDEX = -1000
 scene.setBackgroundColor(3)
 brain = sprites.create(img`
