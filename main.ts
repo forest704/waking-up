@@ -117,8 +117,10 @@ function defend () {
 function drop () {
     moving.vx = 0
     moving.ay = 300
-    sprites.destroy(moving, effects.none, 1000)
+    pause(100)
+    sprites.destroy(moving, effects.none, 100)
     next = next + 1
+    sprites.destroy(target, effects.none, 100)
     if (moving.overlapsWith(target)) {
         moving.ay = 0
         moving.ax = 0
