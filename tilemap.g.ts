@@ -1,4 +1,4 @@
-// Auto-generated code. Do not edit.
+// 自动生成的代码。请勿编辑。
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
@@ -23,8 +23,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile17 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile18 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile2 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile3 = image.ofBuffer(hex``);
@@ -42,6 +40,8 @@ namespace myTiles {
     export const tile15 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile20 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile18 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -452,8 +452,6 @@ namespace myTiles {
             case "tile5":return tile5;
             case "myTile15":
             case "tile17":return tile17;
-            case "myTile16":
-            case "tile18":return tile18;
             case "myTile0":
             case "tile2":return tile2;
             case "myTile1":
@@ -472,9 +470,11 @@ namespace myTiles {
             case "tile15":return tile15;
             case "myTile18":
             case "tile20":return tile20;
+            case "myTile16":
+            case "tile18":return tile18;
         }
         return null;
     })
 
 }
-// Auto-generated code. Do not edit.
+// 自动生成的代码。请勿编辑。
