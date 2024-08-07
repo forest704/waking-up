@@ -254,9 +254,9 @@
 . . 7 7 9 9 9 b b b b b b b 9 . 
 . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
 9 9 . f f f f f f f f f f f f 9 
-7 7 . . . . a a a a 4 4 4 4 . 7 
+7 7 . . . . 4 4 4 4 6 6 6 6 . 7 
 . . . . . . . . . . . . . . . . 
-. . . . . . . a a a 4 4 4 . . . 
+. . . . . . . 4 4 4 6 6 6 . . . 
 `</field><data>{"commentRefs":[],"fieldData":{"img":"erJ~Y)c~hlhrIm3,N7qF"}}</data></shadow></value><value name="kind"><shadow type="spritekind" id="ZmftdaW7OtSi.0a-9-qR"><field name="MEMBER">Player</field></shadow></value></block></value><next><block type="variables_set" id="@(Qd(ECAQSS_0Ww16@Py"><field name="VAR" id="]aGT$p(O`F1M|6~yUy?s">mouse</field><value name="VALUE"><shadow type="math_number" disabled="true"><field name="NUM">0</field></shadow><block type="spritescreate" id="Lm!,cYj)G|^Go/9)E,kT"><value name="img"><shadow type="screen_image_picker" id="!dAJ#C8N?QT!6J0q-Ggv"><field name="img">img`
 9 9 9 9 9 9 9 . . . . . . . . . 
 9 5 5 5 5 5 5 9 . . . . . . . . 

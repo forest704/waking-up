@@ -268,9 +268,9 @@ brain = sprites.create(img`
     . . 7 7 9 9 9 b b b b b b b 9 . 
     . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
     9 9 . f f f f f f f f f f f f 9 
-    7 7 . . . . a a a a 4 4 4 4 . 7 
+    7 7 . . . . 4 4 4 4 6 6 6 6 . 7 
     . . . . . . . . . . . . . . . . 
-    . . . . . . . a a a 4 4 4 . . . 
+    . . . . . . . 4 4 4 6 6 6 . . . 
     `, SpriteKind.Player)
 mouse = sprites.create(img`
     9 9 9 9 9 9 9 . . . . . . . . . 
