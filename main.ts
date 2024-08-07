@@ -17,7 +17,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function defend () {
-    DODDLE = 0
     next = 0
     body = sprites.create(img`
         ................................33333333333333333333333333333333
@@ -123,8 +122,8 @@ function drop () {
     sprites.destroy(moving, effects.none, 100)
     next = next + 1
     sprites.destroy(target, effects.none, 100)
-    if (moving.y >= 70) {
-        music.play(music.stringPlayable("C5 - - - - - - - ", 120), music.PlaybackMode.InBackground)
+    if (moving.overlapsWith(target)) {
+        music.play(music.stringPlayable("A - A - - - - - ", 120), music.PlaybackMode.InBackground)
         moving.ay = 0
         moving.ax = 0
         moving.setVelocity(0, 0)
@@ -180,7 +179,6 @@ let moving: Sprite = null
 let bouncey = 0
 let bounce = 0
 let bac: Sprite = null
-let DODDLE = 0
 let next = 0
 let body: Sprite = null
 let mouse: Sprite = null
@@ -607,7 +605,6 @@ forever(function () {
 })
 forever(function () {
     if (next == 2) {
-        DODDLE = 1
         info.startCountdown(10)
         win = 1
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer0, Z_INDEX)
@@ -735,7 +732,7 @@ forever(function () {
             ................................................................................................................................................................
             `)
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer2, Z_INDEX + 10)
-        pause(2000)
+        pause(1000)
         _6666 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -756,20 +753,14 @@ forever(function () {
             `, SpriteKind.object)
         _6666.setPosition(randint(72, 126), 24)
         _6666.setVelocity(0, randint(10, 20))
-        if (_6666.y >= 95) {
+        if (_6666.y > 50) {
             sprites.destroy(_6666)
         }
-    }
-})
-forever(function () {
-    if (DODDLE == 1) {
-        if (mouse.sx < 72) {
-            music.play(music.stringPlayable("C5 - - - - - - - ", 120), music.PlaybackMode.InBackground)
-            mouse.setPosition(110, mouse.y)
+        if (mouse.sx < 70) {
+            mouse.setPosition(120, mouse.y)
         }
-        if (mouse.sx > 126) {
-            music.play(music.stringPlayable("C5 - - - - - - - ", 120), music.PlaybackMode.InBackground)
-            mouse.setPosition(90, mouse.y)
+        if (mouse.sx > 80) {
+            mouse.setPosition(100, mouse.y)
         }
     }
 })
