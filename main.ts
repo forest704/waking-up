@@ -9,8 +9,11 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.body, function (sprite, otherSpri
     win = 0
     next = 1
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 90) {
+    if (brain.y >= 80) {
         brain.setVelocity(0, -200)
         scene.cameraShake(2, 100)
         sec = sec - 100
@@ -154,9 +157,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function blood_insertion () {
     _1 = 0
     moving.setPosition(91, 53)
@@ -190,6 +190,7 @@ let _6666: Sprite = null
 win = 0
 _1 = 1
 sec = 50
+let doddle = 0
 let Z_INDEX = -500
 music.play(music.createSong(assets.song`bgm`), music.PlaybackMode.LoopingInBackground)
 scene.setBackgroundColor(3)
@@ -606,6 +607,7 @@ forever(function () {
 forever(function () {
     if (next == 2) {
         info.startCountdown(10)
+        doddle = 1
         win = 1
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer0, Z_INDEX)
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer1, Z_INDEX - 1)
@@ -756,6 +758,10 @@ forever(function () {
         if (_6666.y > 50) {
             sprites.destroy(_6666)
         }
+    }
+})
+forever(function () {
+    if (doddle == 1) {
         if (mouse.sx < 70) {
             mouse.setPosition(120, mouse.y)
         }
