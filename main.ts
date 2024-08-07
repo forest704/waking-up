@@ -221,7 +221,7 @@ function blood_insertion () {
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    bac.setVelocity(bounce, bouncey * -1)
+    bac.setVelocity(bounce * 1.1, bouncey * -1)
 })
 let bouncey = 0
 let bounce = 0
@@ -237,6 +237,7 @@ let _12 = 0
 let win = 0
 let bouncebounce = 0
 let _6666: Sprite = null
+music.play(music.createSong(assets.song`bgm`), music.PlaybackMode.LoopingInBackground)
 bouncebounce = 0
 let _1 = 1
 let start = 0
@@ -439,6 +440,11 @@ forever(function () {
 	
 })
 forever(function () {
+    if (sec < -50 || sec > 150) {
+        game.gameOver(false)
+    }
+})
+forever(function () {
     tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile16`)
     pause(100)
     tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile15`)
@@ -448,9 +454,6 @@ forever(function () {
     pause(1000)
     tiles.setCurrentTilemap(tilemap`level6`)
     sec = sec + 100
-})
-forever(function () {
-	
 })
 forever(function () {
     if (info.countdown() == 0.1) {
