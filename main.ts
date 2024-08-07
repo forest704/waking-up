@@ -206,9 +206,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
-sprites.onOverlap(SpriteKind.object, SpriteKind.body, function (sprite, otherSprite) {
-	
-})
 function blood_insertion () {
     _12 = 0
     moving.setPosition(91, 53)
@@ -446,9 +443,6 @@ forever(function () {
             _1 = 0
         }
     }
-})
-forever(function () {
-	
 })
 forever(function () {
 	
@@ -959,24 +953,9 @@ forever(function () {
     }
 })
 forever(function () {
-	
-})
-forever(function () {
-	
-})
-forever(function () {
-	
-})
-forever(function () {
-	
-})
-forever(function () {
     if (start_6666 == 1) {
         if (_6666.y > 83) {
             sprites.destroy(_6666)
         }
     }
-})
-forever(function () {
-	
 })
