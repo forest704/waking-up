@@ -9,9 +9,6 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.body, function (sprite, otherSpri
     win = 0
     next = 1
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
         brain.setVelocity(0, -200)
@@ -157,6 +154,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function blood_insertion () {
     _1 = 0
     moving.setPosition(91, 53)
@@ -194,22 +194,22 @@ let Z_INDEX = -500
 music.play(music.createSong(assets.song`bgm`), music.PlaybackMode.LoopingInBackground)
 scene.setBackgroundColor(3)
 brain = sprites.create(img`
+    . . . . . 8 9 8 . . . . 8 9 8 . 
     . . . . . . . . . . . . . . . . 
+    . . . 8 8 3 3 3 3 3 3 3 3 3 3 . 
+    . . . 8 8 9 9 9 9 9 9 9 9 9 9 . 
+    . . . 8 8 9 9 b b b b b b b 9 . 
+    . . . 8 8 9 b b b a a a a b b . 
+    . . . 8 8 9 b b a a b b a a b . 
+    . . . 8 8 9 b b a b 4 4 b a b . 
+    . . . 8 8 9 b b a a b b a a b . 
+    . . 8 8 9 9 b b b a a a a b b . 
+    . . 8 8 9 9 9 b b b b b b b 9 . 
+    . . . 8 8 9 9 9 9 9 9 9 9 9 9 . 
+    9 9 . f f f f f f f f f f f f 9 
+    7 7 . . . . a a a a 4 4 4 4 . 7 
     . . . . . . . . . . . . . . . . 
-    . . . . d d d d d d . . . . . . 
-    . . . d d d d d d d d d d . . . 
-    . . d d d d . . . . d d d . . . 
-    . . d d d d d d d d . . d d . . 
-    . d d d d . . . . d d . d d . . 
-    . d d d . d d d . d d d . d . . 
-    . d d d d d d d d . d d . d . . 
-    . d d d d d d d d . d d . d . . 
-    . . d d d d . . d . d d . . . . 
-    . . . . d d d . . . d d . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
+    . . . . . . . a a a 4 4 4 . . . 
     `, SpriteKind.Player)
 mouse = sprites.create(img`
     9 9 9 9 9 9 9 . . . . . . . . . 
