@@ -1,9 +1,16 @@
 namespace SpriteKind {
     export const skin = SpriteKind.create()
     export const body = SpriteKind.create()
+    export const object = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.body, function (sprite, otherSprite) {
     sprites.destroy(body)
+    info.changeCountdownBy(info.countdown() * -1 + 0.1)
+    win = 0
+    next = 1
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (brain.y >= 90) {
@@ -80,6 +87,7 @@ function defend () {
         ................................................................
         ................................................................
         `, SpriteKind.body)
+    win = 1
     controller.moveSprite(mouse)
     pause(1000)
     bac = sprites.create(img`
@@ -109,7 +117,6 @@ function defend () {
         music.play(music.stringPlayable("C5 - - - - - - - ", 120), music.PlaybackMode.InBackground)
         bac.setVelocity(bounce * -1, bouncey * -1)
     }
-    mouse.setPosition(100, 67)
 }
 function drop () {
     moving.vx = 0
@@ -119,16 +126,36 @@ function drop () {
     next = next + 1
     sprites.destroy(target, effects.none, 100)
     if (moving.overlapsWith(target)) {
+        music.play(music.stringPlayable("A - A - - - - - ", 120), music.PlaybackMode.InBackground)
         moving.ay = 0
         moving.ax = 0
         moving.setVelocity(0, 0)
+        win = 1
     }
 }
-info.onCountdownEnd(function () {
-	
+sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherSprite) {
+    sprites.destroy(mouse)
+    music.play(music.createSoundEffect(WaveShape.Sine, 4871, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    tiles.setTileAt(tiles.getTileLocation(9, 6), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 7), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 5), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 4), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 3), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 2), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 1), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(9, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(8, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(7, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(6, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(5, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(4, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(3, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(2, 0), assets.tile`myTile28`)
+    tiles.setTileAt(tiles.getTileLocation(1, 0), assets.tile`myTile28`)
+    next = 3
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
+info.onCountdownEnd(function () {
+    info.changeCountdownBy(0.1)
 })
 function blood_insertion () {
     _1 = 0
@@ -158,6 +185,9 @@ let mouse: Sprite = null
 let brain: Sprite = null
 let sec = 0
 let _1 = 0
+let win = 0
+let _6666: Sprite = null
+win = 0
 _1 = 1
 sec = 50
 let Z_INDEX = -500
@@ -204,8 +234,8 @@ controller.moveSprite(mouse, 100, 100)
 tiles.setCurrentTilemap(tilemap`level6`)
 brain.setPosition(20, 50)
 brain.ay = 500
-pause(5000)
 info.startCountdown(10)
+pause(500)
 scroller.setLayerZIndex(scroller.BackgroundLayer.Layer0, Z_INDEX)
 scroller.setLayerImage(scroller.BackgroundLayer.Layer1, img`
     ................................................................................................................................................................
@@ -332,6 +362,9 @@ scroller.setLayerImage(scroller.BackgroundLayer.Layer1, img`
 Z_INDEX = Z_INDEX - 2
 defend()
 forever(function () {
+	
+})
+forever(function () {
     tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile16`)
     pause(100)
     tiles.setTileAt(tiles.getTileLocation(1, 1), assets.tile`myTile15`)
@@ -349,16 +382,60 @@ forever(function () {
 	
 })
 forever(function () {
-    if (info.countdown() == 0) {
+    if (info.countdown() == 0.1) {
+        if (win == 1) {
+            music.play(music.createSoundEffect(WaveShape.Sine, 1, 5000, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            tiles.setTileAt(tiles.getTileLocation(9, 6), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 7), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 5), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 4), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 3), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 2), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 1), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(9, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(8, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(7, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(6, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(5, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(4, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(3, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(2, 0), assets.tile`myTile27`)
+            tiles.setTileAt(tiles.getTileLocation(1, 0), assets.tile`myTile27`)
+        }
+        if (win == 0) {
+            music.play(music.createSoundEffect(WaveShape.Sine, 4871, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            tiles.setTileAt(tiles.getTileLocation(9, 6), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 7), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 5), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 4), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 3), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 2), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 1), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(9, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(8, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(7, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(6, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(5, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(4, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(3, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(2, 0), assets.tile`myTile28`)
+            tiles.setTileAt(tiles.getTileLocation(1, 0), assets.tile`myTile28`)
+        }
+    }
+})
+forever(function () {
+    if (info.countdown() == 0.1) {
         sprites.destroy(body, effects.none, 100)
         sprites.destroy(moving, effects.none, 100)
         sprites.destroy(target, effects.none, 100)
+        sprites.destroy(bac, effects.none, 100)
         next = next + 1
     }
 })
 forever(function () {
     if (next == 1) {
         if (_1 == 1) {
+            win = 0
             info.startCountdown(5)
             moving = sprites.create(img`
                 . . . . . . . 5 . . . . . . . . 
@@ -528,6 +605,8 @@ forever(function () {
 })
 forever(function () {
     if (next == 2) {
+        info.startCountdown(10)
+        win = 1
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer0, Z_INDEX)
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer1, Z_INDEX - 1)
         scroller.setLayerImage(scroller.BackgroundLayer.Layer2, img`
@@ -653,5 +732,31 @@ forever(function () {
             ................................................................................................................................................................
             `)
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer2, Z_INDEX + 10)
+        for (let index = 0; index < 10; index++) {
+            pause(1000)
+            _6666 = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . 4 . . . . . . 4 . . . . . . 
+                . . 4 4 4 4 . . 4 4 . . . . . . 
+                . . 4 . . 4 4 4 4 . . . . . . . 
+                . . 4 . . . 4 4 . . 4 4 4 . . . 
+                . . 4 . . 4 4 . 4 4 4 . . . . . 
+                . . 4 4 4 4 . . 4 4 . . . . . . 
+                . . . 4 4 . 4 4 . . 4 . . . . . 
+                . . . . . 4 . . . . 4 4 . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.object)
+            _6666.setPosition(randint(72, 126), 24)
+            _6666.setVelocity(0, randint(10, 20))
+            if (_6666.y > 50) {
+                sprites.destroy(_6666)
+            }
+        }
     }
 })
