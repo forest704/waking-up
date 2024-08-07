@@ -255,18 +255,18 @@ let doddle = 0
 let Z_INDEX = -500
 scene.setBackgroundColor(3)
 brain = sprites.create(img`
-    . . . . . 8 9 8 . . . . 8 9 8 . 
+    . . . . . b 9 b . . . . b 9 b . 
     . . . . . . . . . . . . . . . . 
-    . . . 8 8 3 3 3 3 3 3 3 3 3 3 . 
-    . . . 8 8 9 9 9 9 9 9 9 9 9 9 . 
-    . . . 8 8 9 9 b b b b b b b 9 . 
-    . . . 8 8 9 b b b a a a a b b . 
-    . . . 8 8 9 b b a a b b a a b . 
-    . . . 8 8 9 b b a b 4 4 b a b . 
-    . . . 8 8 9 b b a a b b a a b . 
-    . . 8 8 9 9 b b b a a a a b b . 
-    . . 8 8 9 9 9 b b b b b b b 9 . 
-    . . . 8 8 9 9 9 9 9 9 9 9 9 9 . 
+    . . . 7 7 3 3 3 3 3 3 3 3 3 3 . 
+    . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
+    . . . 7 7 9 9 b b b b b b b 9 . 
+    . . . 7 7 9 b b b a a a a b b . 
+    . . . 7 7 9 b b a a b b a a b . 
+    . . . 7 7 9 b b a b 4 4 b a b . 
+    . . . 7 7 9 b b a a b b a a b . 
+    . . 7 7 9 9 b b b a a a a b b . 
+    . . 7 7 9 9 9 b b b b b b b 9 . 
+    . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
     9 9 . f f f f f f f f f f f f 9 
     7 7 . . . . a a a a 4 4 4 4 . 7 
     . . . . . . . . . . . . . . . . 
