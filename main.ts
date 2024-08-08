@@ -2463,6 +2463,9 @@ forever(function () {
     if (tempo < -1) {
         game.gameOver(false)
     }
+    if (tempo >= 3) {
+        game.gameOver(true)
+    }
 })
 forever(function () {
     if (tempo == -1) {
