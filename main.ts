@@ -8,8 +8,7 @@ namespace SpriteKind {
 }
 function game_2 () {
     info.startCountdown(5)
-    pause(500)
-    win = 5
+    pause(1000)
     moving = sprites.create(img`
         . . . . . . . 5 . . . . . . . . 
         . . . . . . . 5 5 . . . . . . . 
@@ -175,6 +174,7 @@ function game_2 () {
     target.z = -600
     pause(450)
     TIME = 1
+    win = 5
     if (moving.y > 86) {
         sprites.destroy(moving)
     }
@@ -194,6 +194,9 @@ sprites.onOverlap(SpriteKind.n, SpriteKind.skin, function (sprite, otherSprite) 
     sprites.destroy(target, effects.spray, 200)
     win = 2
     PPPP = 1
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
 })
 function game_1 () {
     win = 1
@@ -325,6 +328,13 @@ function game_1 () {
     defend()
     _1 = 0
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (brain.y >= 80) {
+        brain.setVelocity(0, -500)
+        scene.cameraShake(2, 100)
+        sec = sec - 100
+    }
+})
 function green_light () {
     if (PPPP == 1) {
         tempo += 1
@@ -350,13 +360,6 @@ function blood_insertion () {
         }
     }
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 80) {
-        brain.setVelocity(0, -500)
-        scene.cameraShake(2, 100)
-        sec = sec - 100
-    }
-})
 function defend () {
     body2 = sprites.create(img`
         ................................................................................................................................................................
@@ -512,6 +515,7 @@ function drop () {
 }
 function game3 () {
     if (once == 1) {
+        sec += 150
         info.startCountdown(10)
         doddle = 1
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer0, Z_INDEX)
@@ -671,12 +675,10 @@ function game3 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherSprite) {
     sprites.destroy(mouse)
     red_light()
+    result = 1
 })
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
 })
 function red_light () {
     if (_0000 == 1) {
@@ -832,21 +834,21 @@ let next = 0
 let game_2_drop_stop = 0
 let bouncebounce = 0
 let mouse: Sprite = null
-let sec = 0
-let brain: Sprite = null
 let oncein_game_2 = 0
 let _12 = 0
 let green: Sprite = null
 let tempo = 0
+let sec = 0
+let brain: Sprite = null
 let _1 = 0
 let PPPP = 0
 let bac: Sprite = null
 let body2: Sprite = null
+let win = 0
 let TIME = 0
 let Z_INDEX = 0
 let target: Sprite = null
 let moving: Sprite = null
-let win = 0
 let opening: Sprite = null
 let start = 0
 let start_rhyme = 0
@@ -3734,6 +3736,8 @@ forever(function () {
 })
 forever(function () {
     if (start == 10) {
+        sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+        sec = 0
         music.stopAllSounds()
         opening = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -4483,9 +4487,12 @@ forever(function () {
             2222222222222222222333333333333333333333333333333333888888dddddddddd7777777777cccccccccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeee
             2222222222222222222333333333333333333333333333333333888888dddddddddd7777777777cccccccccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeee
             `],
-        100,
-        true
+        2000,
+        false
         )
+        pause(12000)
+        game.setGameOverMessage(true, "...")
+        game.gameOver(true)
     }
 })
 forever(function () {
@@ -4529,7 +4536,7 @@ forever(function () {
     if (start_rhyme == 1) {
         tiles.setCurrentTilemap(tilemap`level6`)
         sec = sec + 100
-        pause(rhyme * 2)
+        pause(rhyme * 1.5)
     }
 })
 forever(function () {
@@ -4638,7 +4645,7 @@ forever(function () {
     }
 })
 forever(function () {
-    if (sec < -250 || sec > 250) {
+    if (sec < -200 || sec > 500) {
         game.setGameOverMessage(false, "FREQUENCY DISORDER")
         game.gameOver(false)
     }
