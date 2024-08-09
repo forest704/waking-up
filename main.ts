@@ -3593,15 +3593,17 @@ forever(function () {
     }
 })
 forever(function () {
+    if (tempo < -1) {
+        game.setGameOverMessage(false, "LOW FREQUENCY")
+        game.gameOver(false)
+    }
     if (result == 1) {
-        if (tempo < -1) {
-            game.gameOver(false)
-        }
         if (tempo >= 3) {
             start = 10
             shabi = 0
         } else {
             game.setGameOverMessage(false, "NOT ACTIVATED")
+            game.gameOver(false)
         }
     }
 })
