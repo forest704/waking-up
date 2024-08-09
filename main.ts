@@ -195,9 +195,6 @@ sprites.onOverlap(SpriteKind.n, SpriteKind.skin, function (sprite, otherSprite) 
     win = 2
     PPPP = 1
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function game_1 () {
     win = 1
     info.startCountdown(10)
@@ -328,13 +325,6 @@ function game_1 () {
     defend()
     _1 = 0
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 80) {
-        brain.setVelocity(0, -500)
-        scene.cameraShake(2, 100)
-        sec = sec - 100
-    }
-})
 function green_light () {
     if (PPPP == 1) {
         tempo += 1
@@ -360,6 +350,13 @@ function blood_insertion () {
         }
     }
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (brain.y >= 80) {
+        brain.setVelocity(0, -500)
+        scene.cameraShake(2, 100)
+        sec = sec - 100
+    }
+})
 function defend () {
     body2 = sprites.create(img`
         ................................................................................................................................................................
@@ -680,6 +677,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function red_light () {
     if (_0000 == 1) {
         music.play(music.createSoundEffect(WaveShape.Sine, 4871, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
@@ -834,12 +834,12 @@ let next = 0
 let game_2_drop_stop = 0
 let bouncebounce = 0
 let mouse: Sprite = null
+let sec = 0
+let brain: Sprite = null
 let oncein_game_2 = 0
 let _12 = 0
 let green: Sprite = null
 let tempo = 0
-let sec = 0
-let brain: Sprite = null
 let _1 = 0
 let PPPP = 0
 let bac: Sprite = null
@@ -3793,9 +3793,9 @@ forever(function () {
             666666666666644444aaaa66666666ddf333333333333333333bbb333bbbb44444444444dddddddddddddddddddddddcccccccbbbbbbbb8888833333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
             4446666666444444aaaa66666666ddd66666666663333333333bbb6333bbb4444444444444ddddddddccccddddddddddccccccbbbbbbb888888833333333333333bbb333bbbbbbbbbbbbbbbbbbbbbbbb
             ff444444444444aaaa666666666dd66666666666666666666666666633bbb444444444444ddddddddcccccddddddddddccccccbbbbbbb8888888333333333333333333333bbbbbbbbbbbbbbbbbbbbbbb
-            ffff44444444aaafff66666666dd666666666666666666666666666633bbb444444444ddddddddddcccccddddddddddddcccccbbbbbbb88888888833333333333333333333333bbbbbbbbbbbbbbbbbbb
-            f44444444aaaafff666666666dddddd666666666666666666666666633bbb44444444dddddddddddccccdddddddddddddcccccbbbbbb888888888883333333333333333333333bbbbbbbbbbbbbbbbbbb
-            4444444aaafff66666666666ddbbbbdddddd666666666ddddddddddd33bbb4444dddddddddddddddcccddddddddddddddcccccbbbbbb88888888883333333333333333333333bbbbbbbbbbbbbbbbbbbb
+            ffff44444444aaafff66666666dd666666666666666666666666666633bbb44444444ffffffdddddcccccddfffdddddddcccccbbbbbbb88888888833333333333333333333333bbbbbbbbbbbbbbbbbbb
+            f44444444aaaafff666666666dddddd666666666666666666666666633bbb4444fffffddddddddddccccddddddfffffddcccccbbbbbb888888888883333333333333333333333bbbbbbbbbbbbbbbbbbb
+            4444444aaafff66666666666ddbbbbdddddd666666666ddddddddddd33bbb4444dddddddddddddddcccdddddddddddffdcccccbbbbbb88888888883333333333333333333333bbbbbbbbbbbbbbbbbbbb
             4aaaaaaffff66666666666dddbbbbbbb3333dddddddddd3333333bb333bbb444ddddddddddddddddccddddddddddddddddccccbbbbb88888888888833333333333333333333bbbbbbbbbbbbbbbbbbbbb
             4aaafff6666666666666ddbbbbbbbbb33333333333333333333333bb3bbbb44dddcdddddddccddddccddddcddddddddddccccbbbbbb8888888888833333333333333333333bbbbbbbbbbbbbbbbbbbbbb
             fafff666666666666dddbbbbbbbbbbbb3333333333333333333333bbbbbbb44dffcccccccccfcdddddddddfcccccccccfccccbbbbbb8888888888333333333333333333333bbbbbbbbbbbbbbbbbbbbbb
@@ -3918,10 +3918,10 @@ forever(function () {
             6444444aaaa666666666ddddf33333333333333333333bbb3333bbbb44444444444444dddddddddddddddddddddddddddccccccccbbbbbbbb88888833333333333333333bbbbbbbbbbbbbbbbbbbbbbbb
             6444444aaaa666666666ddddf33333333333333333333bbb3333bbbb44444444444444dddddddddddddddddddddddddddccccccccbbbbbbbb88888833333333333333333bbbbbbbbbbbbbbbbbbbbbbbb
             44444aaaa666666666ddd666666666666633333333333bbb63333bbb4444444444444444dddddddddccccdddddddddddddcccccccbbbbbbb8888888833333333333333333bbb3333bbbbbbbbbbbbbbbb
-            44aaaaa6666666666dd6666666666666666666666666666666633bbb444444444444444dddddddddcccccdddddddddddddcccccccbbbbbbb888888883333333333333333333333333bbbbbbbbbbbbbbb
-            aaaffff666666666dd66666666666666666666666666666666633bbb44444444444ddddddddddddcccccdddddddddddddddccccccbbbbbbb8888888888333333333333333333333333333bbbbbbbbbbb
-            affff6666666666dddddd66666666666666666666666666666633bbb4444444444dddddddddddddccccddddddddddddddddccccccbbbbbb88888888888883333333333333333333333333bbbbbbbbbbb
-            f6666666666666ddbbbbdddddddd6666666666ddddddddddddd33bbb444444dddddddddddddddddcccdddddddddddddddddccccccbbbbbb8888888888833333333333333333333333333bbbbbbbbbbbb
+            44aaaaa6666666666dd6666666666666666666666666666666633bbb444444444444444dddddddddcccccddddfffffddddcccccccbbbbbbb888888883333333333333333333333333bbbbbbbbbbbbbbb
+            aaaffff666666666dd66666666666666666666666666666666633bbb444444444ffffffffddddddcccccddddddddddfffddccccccbbbbbbb8888888888333333333333333333333333333bbbbbbbbbbb
+            affff6666666666dddddd66666666666666666666666666666633bbb444444ffffdddddddddddddccccdddddddddddddfddccccccbbbbbb88888888888883333333333333333333333333bbbbbbbbbbb
+            f6666666666666ddbbbbdddddddd6666666666ddddddddddddd33bbb444444fddddddddddddddddcccdddddddddddddddddccccccbbbbbb8888888888833333333333333333333333333bbbbbbbbbbbb
             f6666666666666ddbbbbdddddddd6666666666ddddddddddddd33bbb444444dddddddddddddddddcccdddddddddddddddddccccccbbbbbb8888888888833333333333333333333333333bbbbbbbbbbbb
             66666666666ddddbbbbbbbbb3333ddddddddddd33333333bb3333bbb44444ddddddddddddddddddccdddddddddddddddddddcccccbbbbb8888888888888833333333333333333333333bbbbbbbbbbbbb
             666666666ddbbbbbbbbbb333333333333333333333333333bbb3bbbb44dddddcddddddddccdddddccddddccddddddddddddccccbbbbbbb888888888888333333333333333333333333bbbbbbbbbbbbbb
@@ -4046,11 +4046,11 @@ forever(function () {
             ddddff333333333333333333333333333bbbb333333bbbbb44444444444444444444ddddddddddddddddddddddddddddddddddddccccccccccccbbbbbbbbbbb8888888833333333333333333333333bb
             ddddff333333333333333333333333333bbbb333333bbbbb44444444444444444444ddddddddddddddddddddddddddddddddddddccccccccccccbbbbbbbbbbb8888888833333333333333333333333bb
             d66666666666666666333333333333333bbbb6333333bbbb44444444444444444444444ddddddddddddcccccdddddddddddddddddddcccccccccbbbbbbbbb88888888888833333333333333333333333
-            d66666666666666666333333333333333bbbb6333333bbbb44444444444444444444444ddddddddddddcccccdddddddddddddddddddcccccccccbbbbbbbbb88888888888833333333333333333333333
-            66666666666666666666666666666666666666666633bbbb444444444444444444444dddddddddddddccccccdddddddddddddddddddcccccccccbbbbbbbbb88888888888833333333333333333333333
-            66666666666666666666666666666666666666666633bbbb444444444444444ddddddddddddddddccccccccdddddddddddddddddddddccccccccbbbbbbbbb88888888888888333333333333333333333
-            d6666666666666666666666666666666666666666633bbbb44444444444444dddddddddddddddddcccccccddddddddddddddddddddddccccccccbbbbbbbb888888888888888888333333333333333333
-            dddddddddd6666666666666ddddddddddddddddddd33bbbb444444444ddddddddddddddddddddddcccccddddddddddddddddddddddddccccccccbbbbbbbb888888888888888333333333333333333333
+            d66666666666666666333333333333333bbbb6333333bbbb44444444444444444444444ddddddddddddcccccdddffddddddddddddddcccccccccbbbbbbbbb88888888888833333333333333333333333
+            66666666666666666666666666666666666666666633bbbb444444444444444444444dddfffdddddddccccccddddfffddddddddddddcccccccccbbbbbbbbb88888888888833333333333333333333333
+            66666666666666666666666666666666666666666633bbbb444444444444444dddddffffdddddddccccccccdddddddfffdddddddddddccccccccbbbbbbbbb88888888888888333333333333333333333
+            d6666666666666666666666666666666666666666633bbbb44444444444ffffffffffddddddddddcccccccddddddddddfffffdddddddccccccccbbbbbbbb888888888888888888333333333333333333
+            dddddddddd6666666666666ddddddddddddddddddd33bbbb444444444ddddddddddddddddddddddcccccdddddddddddddddddffffffdccccccccbbbbbbbb888888888888888333333333333333333333
             dddddddddd6666666666666ddddddddddddddddddd33bbbb444444444ddddddddddddddddddddddcccccddddddddddddddddddddddddccccccccbbbbbbbb888888888888888333333333333333333333
             dddddddddd6666666666666ddddddddddddddddddd33bbbb444444444ddddddddddddddddddddddcccccddddddddddddddddddddddddccccccccbbbbbbbb888888888888888333333333333333333333
             bbbb333333ddddddddddddddd33333333333bb333333bbbb44444444dddddddddddddddddddddddccccddddddddddddddddddddddddddcccccccbbbbbbb8888888888888888888333333333333333333
@@ -4171,12 +4171,12 @@ forever(function () {
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb44444444444444444444ddddddddddddddddddddcccccccccccdddddddddddddddddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
-            666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
-            666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
-            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
-            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccddfffddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
+            666666666666666666666666666666633bbbbb44444444444444444444ddffffffffffddddddddcccccccccccdddddfffffdddddddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444fffffffffdddddddddddddccccccccccddddddddddffffddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
+            666666666666666666666666666666633bbbbb44444444444444fffffdddddddddddddddddddddccccccccccdddddddddddddfffffddddddddddccccccccccbbbbbbbbbb888888888888888888888883
+            6666666dddddddddddddddddddddddd33bbbbb444444444444dfddddddddddddddddddddddddddcccccccddddddddddddddddddddffffffdddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccddddddddddddddddddddddddfffddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             ddddddddd33333333333333bbb3333333bbbbb44444444444dddddddddddddddddddddddddddddccccccdddddddddddddddddddddddddddddddddcccccccccbbbbbbbbb8888888888888888888888883
@@ -4292,12 +4292,12 @@ forever(function () {
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb44444444444444444444ddddddddddddddddddddcccccccccccdddddddddddddddddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
-            666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
-            666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
-            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
-            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccddddddffffdddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
+            666666666666666666666666666666633bbbbb44444444444444444444ddfffffffffdddddddddcccccccccccddddddddfffffffddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444fffffffdddddddddddddddccccccccccdddddddddddddddfffddddddddddccccccccccbbbbbbbbbb888888888888888888888883
+            666666666666666666666666666666633bbbbb44444444444444fffffdddddddddddddddddddddccccccccccdddddddddddddddddfffffddddddccccccccccbbbbbbbbbb888888888888888888888883
+            6666666dddddddddddddddddddddddd33bbbbb444444444444dffdddddddddddddddddddddddddcccccccdddddddddddddddddddddddffffddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccddddddddddddddddddddddddfdfddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             ddddddddd33333333333333bbb3333333bbbbb44444444444dddddddddddddddddddddddddddddccccccdddddddddddddddddddddddddddddddddcccccccccbbbbbbbbb8888888888888888888888883
@@ -4306,8 +4306,8 @@ forever(function () {
             333333333333333333333333bbbbbbb3bbbbbb4444dddddddddcddddddddddddddddccddddddddccccccddddddccccddddddddddddddddddddddccccccbbbbbbbbbbbbb8888888888888888888833333
             333333333333333333333333bbbbbbbbbbbbbb4444dddddddffbbbbbbbbbbbbbbbbbbfccddddddddddddddddddfffffbbbbbbbbbbbbfffffffffccccccbbbbbbbbbbbbb8888888888888888888333333
             333333333333333333333333bbbbbbbbbbbbbb4444dddddddfffffffffffffffffffffccddddddddddddddddddffffffffffffffffffffffffffccccccbbbbbbbbbbbbb8888888888888888888333333
-            33333333333333333333333333bbbbbbbbbbbb44ddddddddddfff8888bbbbbbbb88fffddddddddddddddddddddddddfffff88bbbbbbbb8888fffccccccbbbbbbbbb88888888888888888888883333333
-            33333333333333333333333333bbbbbbbbbbbb44ddddddddddffffff8bbbbbbbbfffffddddddddddddddddddddddddffffcffbbbbbbbb888fccfccccccbbbbbbbbb88888888888888888888883333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddfff5555bbbbbbbb55fffddddddddddddddddddddddddfffff55bbbbbbbb5555fffccccccbbbbbbbbb88888888888888888888883333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddffffff5bbbbbbbbfffffddddddddddddddddddddddddffffcffbbbbbbbb555fccfccccccbbbbbbbbb88888888888888888888883333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccfffffffffcccddddddddddddddddddddddddddddddcccfffffffffffcccdccccccccccdbb8888888888888888888888888333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
@@ -4413,22 +4413,143 @@ forever(function () {
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
             3333333333333333333bbbbb663333333bbbbb444444444444444444444444444444ddddddddddddddddccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccdddddddddddddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
-            666666666666666666666666666666633bbbbb44444444444444444444ddddddddddddddddddddcccccccccccdddddddddddddddddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444444444444ddddddddddddddddddcccccccddddddffffdddddddddddddddcccccccccccbbbbbbbbbbb88888888888888883333333
+            666666666666666666666666666666633bbbbb44444444444444444444ddfffffffffdddddddddcccccccccccddddddddfffffffddddddddddddccccccccccbbbbbbbbbbb88888888888888888833333
+            666666666666666666666666666666633bbbbb444444444444444444fffffffdddddddddddddddccccccccccdddddddddddddddfffddddddddddccccccccccbbbbbbbbbb888888888888888888888883
+            666666666666666666666666666666633bbbbb44444444444444fffffdddddddddddddddddddddccccccccccdddddddddddddddddfffffddddddccccccccccbbbbbbbbbb888888888888888888888883
+            6666666dddddddddddddddddddddddd33bbbbb444444444444dffdddddddddddddddddddddddddcccccccdddddddddddddddddddddddffffddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccddddddddddddddddddddddddfdfddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
+            ddddddddd33333333333333bbb3333333bbbbb44444444444dddddddddddddddddddddddddddddccccccdddddddddddddddddddddddddddddddddcccccccccbbbbbbbbb8888888888888888888888883
+            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddcddddddddf333fdddccddddddddccccccddddddccccddddddddddddddddddddddccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddcdf3f333bbbbbff33ccddddddddccccccddddddccccdddddfff333333333fddddccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddf333ffbbb77bbb55ffcddddddddccccccddddddccccddd3333bbbbbbbbb53fdddccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffb35555bbb777bb55fffccddddddddddddddddddfffffbbbbb5bbb77bff5533fffccccccbbbbbbbbbbbbb8888888888888888888333333
+            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffff5555fff7ffff55fffccddddddddddddddddddffffffffff5fff77fff55fffffccccccbbbbbbbbbbbbb8888888888888888888333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddfff5555bbbbbbb555fffddddddddddddddddddddddddfffff55bbbbbbbb5555fffccccccbbbbbbbbb88888888888888888888883333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddffffff55bbbbbbbfffffddddddddddddddddddddddddffffcffbbbbbbbb555fccfccccccbbbbbbbbb88888888888888888888883333333
+            3333333333333333333333333333333bbbbbbb4444ddddddddddccccfffffffffcccddddddddddddddddddddddddddddddcccfffffffffffcccdccccccccccdbb8888888888888888888888888333333
+            3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
+            3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
+            3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
+            33333333333333333333333333333338dccccc444444444444dddddddddddddddddddddddd8888eeeeeeeeeeddddddddddddddddddddddddddddcccccccccccdd8888888888888888888888888333333
+            33333333333333333333333333333338dccccc444444444444dddddddddddddddddddddddd8888eeeeeeeeeeddddddddddddddddddddddddddddcccccccccccdd8888888888888888888888888333333
+            33333333333333333333333333333338dccccc44444444444444dddddddddddddddddddddd8882222225eeeedddddddddddddddddddccccccccccccccccccccdd8888888888888888888888888833333
+            33333333333333333333333333333338dccccc44444444444444dddddddddddddddddddddd8882222225eeeedddddddddddddddddddccccccccccccccccccccdd8888888888888888888888888833333
+            33333333333333333333333333333338dccccc44444444444444dddddddddddddddddddddd8882222225eeeedddddddddddddddddddccccccccccccccccccccdd8888888888888888888888888833333
+            33333333333333333333333333333338dccccc44444444444444444ddddddddddddddddd888882555555eeeeedddddddddcccccccccccccccccccccccccccccdd8888888888888888888888888333333
+            33333333333333333333333333333338dccccc44444444444444444ddddddddddddddddd888882555555eeeeedddddddddcccccccccccccccccccccccccccccdd8888888888888888888888888333333
+            33333333333333333333333333333338dccccc44444444444444444ddddddddddddddddd888882555555eeeeedddddddddcccccccccccccccccccccccccccccdd8888888888888888888888888333333
+            333333333333333333333333333333388ccccc44444444444444dddddddddddddddddd88882222555555eeeeeedddddcccccccccccccccccccccccccccccccd88888888888888888888888888883333e
+            333333333333333333333333333333388ccccc44444444444444dddddddddddddddddd88882222555555eeeeeedddddcccccccccccccccccccccccccccccccd88888888888888888888888888883333e
+            333333333333333333333333333333388ccccc44444444444444dddddddddddddddddd88882222555555eeeeeedddddcccccccccccccccccccccccccccccccd88888888888888888888888888883333e
+            333333333333333333333333333333388ccccc44444444444444dddddddddddddddddd88882222555555eeeeeedddddcccccccccccccccccccccccccccccccd88888888888888888888888888883333e
+            333333333333333333333333333333338ccccccc4444444444dddddddddddddddddddd88222222555552eeeeeedddddcccccccccccccccccccccccccccddddd8888888888888888888888888888eeeee
+            333333333333333333333333333333338888cccc4444444444ddddddddddddddddddd888222225555552eeeeeeeeeedcccccccccccccccccccccccccccdddd88888888888888888888888888888eeeee
+            3333333333333333333333333333333338888ccc44444444444dddddddddddddddddd822222225555552eeeeeeeeeedccccccccccccccccccccccccccddddd88888888888888888888888888888eeeee
+            3333333333333333333333333333333338888ccc44444444444dddddddddddddddddd822222225555552eeeeeeeeeedccccccccccccccccccccccccccddddd88888888888888888888888888888eeeee
+            3333333333333333333333333333333333338ddd444444444444444ddddddddddddd88222222255555522eeeeeeeeedcccccccccccccccccccccccdddd888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333338ddd444444444444444ddddddddddddd88222222255555522eeeeeeeeedcccccccccccccccccccccccdddd888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333338ddd444444444444444ddddddddddddd88222222255555522eeeeeeeeedcccccccccccccccccccccccdddd888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333338ddd444444444444444ddddddddddddd88222222255555522eeeeeeeeedcccccccccccccccccccccccdddd888888888888888888888888888888888eeeee
+            33333333333333333333333333333333333388dd4444444444444444dddddddddddd82222222225555522eeeeeeeeeeccccccccccccccccccccccdddd8888888888888888888888888888888888eeeee
+            333333333333333333333333333333333333388844444444444444444444444ddddd82222222222222222eeeeeeeeeecccccccccccccccccccccdd8888888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333333888884444444444444d4444444dd88882222222225555522222eeeeeeeccccccccccccccccccccd888888888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333333888884444444444444d4444444dd88882222222225555522222eeeeeeeccccccccccccccccccccd888888888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333333888884444444444444d4444444dd88882222222225555522222eeeeeeeccccccccccccccccccccd888888888888888888888888888888888888888eeeee
+            333333333333333333333333333333333333388888888888844dddddddddddddd88822222222255555522777777777eeeecccccccccccccddddd888888888888888888888888888888888888888eeeee
+            333333333333333333333333333333333333388888888888844dddddddddddddd88822222222255555522777777777eeeecccccccccccccddddd888888888888888888888888888888888888888eeeee
+            3333333333333333333333333333333333333388888888888444ddddddddddddd888222222222555555227777777777eeecccccccccccccddddd8888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333388888888888444ddddddddddddd888222222222555555227777777777eeecccccccccccccddddd8888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333388888888888444ddddddddddddd888222222222555555227777777777eeecccccccccccccddddd8888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333333888888888444ddddddddddddd888822222222555555277777777777eeecccccccccdddddddd88888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333333888888888444ddddddddddddd888822222222555555277777777777eeecccccccccdddddddd88888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333333888888888444ddddddddddddd888822222222555555277777777777eeecccccccccdddddddd88888888888888888888888888888888888888888888e
+            3333333333333333333333333333333333333333338888888844444ddddddddddddd822222222555555557777777777eeeccccccccccccc8888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333338844444dddddddddddd882222222255555557777777777cccccccccccccccc8888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333333888884ddddddddddddd8222222222222255777777777ccccccccccccc88888888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333333888884ddddddddddddd8222222222222255777777777ccccccccccccc88888888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333333888884ddddddddddddd8222222222222255777777777ccccccccccccc88888888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333333388888ddddddddddddd8882222222222255777777777cccccccccc88888888888888888888888888888888888888888888888888888888
+            33333333333333333333333333333333333333333333333333388888ddddddddddddd8882222222222255777777777cccccccccc88888888888888888888888888888888888888888888888888888888
+            3333333333333333333333333333333333333333333333333333888888dddddddddddddd888888222222777777cccccccccccccc88888888888888888888888888888888888888888888888888888888
+            3333333333333333333333333333333333333333333333333333888888dddddddcccccccddcccddddddd77777ccccccccccccccc88888888888888888888888888888888888888888888888888888888
+            3333333333333333333333333333333333333333333333333333888888dddddddcccccccddcccddddddd77777ccccccccccccccc88888888888888888888888888888888888888888888888888888888
+            3333333333333333333333333333333333333333333333333333888888dddddddcccccccddcccddddddd77777ccccccccccccccc88888888888888888888888888888888888888888888888888888888
+            333333333333333333333333333333333333333333333333333388888888888ddddddccccccccc7777777cccccccccccccccccc888888888888888888888888888888888888888888888888888888888
+            333333333333333333333333333333333333333333333333333388888888888dddddddddccccc77777777cccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            333333333333333333333333333333333333333333333333333388888888888dddddddddccccc77777777cccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            333333333333333333333333333333333333333333333333333388888888888dddddddddccccc77777777cccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            333333333333333333333333333333333333333333333333333388888888888dddddddddccccc77777777cccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            3333333333333333333333333333333333333333333333333333888888dddddddddddddd77777777777cccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            3333333333333333333333333333333333333333333333333333888888dddddddddddddd77777777777cccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeeee
+            2222222222222222222333333333333333333333333333333333888888dddddddddd7777777777cccccccccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeee
+            2222222222222222222333333333333333333333333333333333888888dddddddddd7777777777cccccccccccccccccccccccccc888888888888888888888888888888888888888888888888888eeeee
+            `,img`
+            bbbbbbbbb666666666ddd33333333333bbbbbbbbaaaaaaaaa444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbbbb666666666ddd33333333333bbbbbbbbaaaaaaaaa444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbbbb666666666ddd33333333333bbbbbbbbaaaaaaaaa444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbb66666666666d333333333333bbbbbbbbbaaaaaaaaa4444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbb66666666666d333333333333bbbbbbbbbaaaaaaaaa4444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbb66666666666d333333333333bbbbbbbbbaaaaaaaaa4444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666666daaaaaaaaaaaa33333333333333333333333333
+            bbbbbbb6666666666d33333333bbbbbbbbbbbbbbaaaaaaaaa4444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666dddaaaaaaaaaaaaab3333333333333333333333333
+            bbbbbbb6666666666d33333333bbbbbbbbbbbbbbaaaaaaaaa4444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb6666666dddaaaaaaaaaaaaab3333333333333333333333333
+            bbbbb666666666dddd333333bbbbbbbb3333bbbbbbaaaaaaaa444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb66666666666dddaaaaaaaaaabbbbb333333333333333333333334
+            bbbbb666666666dddd333333bbbbbbbb3333bbbbbbaaaaaaaa444444bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb66666666666dddaaaaaaaaaabbbbb333333333333333333333334
+            bbbb6666666666ddd3344444444444444333bbbbbbaaaaaaaa44444444333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333366666666666666dddbaaaaaaabbbbbbb333333333333333333444444
+            444444444444444444444444444444444333bbbbbbaaaaaaaa44444433333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333dddd6666666666ddddbbbbbbbbbbbbbbb333333333333344444444444
+            444444444444444444444444444444444333bbbbbbaaaaaaaa44444433333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333dddd6666666666ddddbbbbbbbbbbbbbbb333333333333344444444444
+            444444444444444444444444444444444333bbbbbbaaaaaaaa44444433333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333dddd6666666666ddddbbbbbbbbbbbbbbb333333333333344444444444
+            444444444444444444444444444444444333bbbbbbaaaaaaaa44444433333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333dddd6666666666ddddbbbbbbbbbbbbbbb333333333333344444444444
+            444444444444444444444444444444444333bbbbbbaaaaaaaaa3333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333dddd6666666666dbbbbbbbbbbbbb3333bb33333333444444444444444
+            444444444444444444444444444444444333bbbbbb3333333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3dddddddd6666dd3bbbbbbbbbbb334444444444444444444444444444a
+            444444444444444444444444444444444333bbbbbb3333333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3dddddddd6666dd3bbbbbbbbbbb334444444444444444444444444444a
+            aaaaaaa44444444444444444444444443333bbbbbb3333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333ddddddddd33bbbbbbbbbbb3344444444444444444444444aaaaa3
+            aaaaaaa44444444444444444444444443333bbbbbb3333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333ddddddddd33bbbbbbbbbbb3344444444444444444444444aaaaa3
+            6666d33aaaaaaaaaa4444444444444443333bbbbbb333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb3333333dddd333bbbbbbbbb33444444444444444444444aaaaa33333
+            6666d333333333333aaaaaa4444444443bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444ddddddcccccccccccccbbbb33333333333bbbbbbbbb333333333333333333333333333333333
+            6666d333333333333aaaaaa4444444443bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444ddddddcccccccccccccbbbb33333333333bbbbbbbbb333333333333333333333333333333333
+            6666d333333333333aaaaaa4444444443bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444ddddddcccccccccccccbbbb33333333333bbbbbbbbb333333333333333333333333333333333
+            6666d333333333333aaaaaa4444444443bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb44444444444444444444ddddddcccccccccccccbbbb33333333333bbbbbbbbb333333333333333333333333333333333
+            66ddd3333333333333333aaaaa3333333bbbbbbbbbbbbbbbbbbbbbb44444444444444444444444ddddddddddddddddddddcccccccccbbbbbbbbbbbbbbbbbbbbbb3333333333388888888888888888883
+            66ddd3333333333333333aaaaa3333333bbbbbbbbbbbbbbbbbbbbbb44444444444444444444444ddddddddddddddddddddcccccccccbbbbbbbbbbbbbbbbbbbbbb3333333333388888888888888888883
+            66ddd3333333333333333aaaaa3333333bbbbbbbbbbbbbbbbbbbbbb44444444444444444444444ddddddddddddddddddddcccccccccbbbbbbbbbbbbbbbbbbbbbb3333333333388888888888888888883
+            dddd33333333333333333bbb333333333bbbbbbbbbbbbbbbbbbb44444444444444444444444444ddddddddddddddddddddcccccccccccccccccbbbbbbbbbbbbbb3333333bbbb88888888888888888888
+            3333333333333333333bbbbb33333333bbbbbbbbbbbbbbbbbb4444444444444444444444444444dddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbb33333bbbb88888888888888888888
+            3333333333333333333bbbbb33333333bbbbbbbbbbbbbbbbbb4444444444444444444444444444dddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbb33333bbbb88888888888888888888
+            3333333333333333333bbbbb3333333bbbbbbbbbbbbbbbbbb44444444444444444444444ddddddddddddddddddddddddddddddccccccccccccccccbbbbbbbbbbbbbbbb33bbbb88888888888888888883
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4444444444444444ddddddddddddddddddddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4444444444444444ddddddddddddddddddddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4444444444444444ddddddddddddddddddddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbbbb4444444444444444444444ddddddddddddddddddddddddddddddddddddddddccccccccccccccccccbbbbbbbbbbbbbbbbbb88888888888888333333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddcccccccccccccccbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddcccccccccccccccbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbbbbbbbbbbbbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddcccccccccccccccbbbbbbbbbbbbbbbbbb88888888888888833333
+            3333333333333333333bbbb33333333bbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddddddcccccccccccbbbbbbbbbbbbbbbbbb88888888888888333333
+            3333333333333333333bbbb33333333bbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddddddcccccccccccbbbbbbbbbbbbbbbbbb88888888888888333333
+            3333333333333333333bbbb33333333bbbbbbbbb444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddddddcccccccccccbbbbbbbbbbbbbbbbbb88888888888888333333
+            3333333333333333333bbbbb33333333bbbbbb44444444444444444444444444dddddddddddddddddddddddddddddddddddddddddddddddcccccccccccccccbbbbbbbbbbbbbb88888888883333333333
+            3333333333333333333bbbbb33333333bbbbbb444444444444444444444fffffffffffdddddddddddddddddddddddddddfffffffdddddddcccccccccccccccbbbbbbbbbbbbbb88888888883333333333
+            3333333333333333333bbbbb663333333bbbbb44444444444444444fffffffffffffddddddddddddddddccccccdddddddffffffffffffddddddcccccccccccbbbbbbbbbbb88888888888888883333333
+            3333333333333333333bbbbb663333333bbbbb44444444444444ffffff4444444444ddddddddddddddddccccccddddddddddddfddffffffffddcccccccccccbbbbbbbbbbb88888888888888883333333
+            3333333333333333333bbbbb663333333bbbbb444444444444ffff44444444444444ddddddddddddddddccccccddddddddddddddddddffffffffccccccccccbbbbbbbbbbb88888888888888883333333
+            666666666666666666666666666666633bbbbb4444444444444ff444444444444ddddddddddddddddddcccccccdddddddddddddddddddddfffffccccccccccbbbbbbbbbbb88888888888888883333333
+            666666666666666666666666666666633bbbbb44444444444444444444ddddddddddddddddddddcccccccccccddddddddddddddddddddddddfdffcccccccccbbbbbbbbbbb88888888888888888833333
             666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
             666666666666666666666666666666633bbbbb444444444444444444ddddddddddddddddddddddccccccccccddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888888883
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
-            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddd33333333333ddddddddddddcccccccddddddddddddddd33333333333dddddccccccccccbbbbbbbbbb888888888888888888833333
+            6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             6666666dddddddddddddddddddddddd33bbbbb444444444444ddddddddddddddddddddddddddddcccccccdddddddddddddddddddddddddddddddccccccccccbbbbbbbbbb888888888888888888833333
             ddddddddd33333333333333bbb3333333bbbbb44444444444ddddd333333333333ddddddddddddccccccdddddddddddddd3333333333333ddddddcccccccccbbbbbbbbb8888888888888888888888883
-            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddcd33333bbbbbbb33333ddddddddccccccddddddccccdd333333bbbbbb33333dddccccccbbbbbbbbbbbbb8888888888888888888833333
-            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddc3338bbbbbbbbbb8333ddddddddccccccddddddccccdd3388bbbbbbbbbb8833ddccccccbbbbbbbbbbbbb8888888888888888888833333
-            333333333333333333333333bbbbbbb3bbbbbb4444ddddddddd33888bbbbbbbbbb8333ddddddddccccccddddddccccd33388bbbbbbbbbb888333ccccccbbbbbbbbbbbbb8888888888888888888833333
-            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffbb888bbbb777bbb8bbfccddddddddddddddddddfffffbbb88bbbb7777bb888fffccccccbbbbbbbbbbbbb8888888888888888888333333
-            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffff888bbbb777bbb8fffccddddddddddddddddddffffffff88bbbb7777bb888fffccccccbbbbbbbbbbbbb8888888888888888888333333
-            33333333333333333333333333bbbbbbbbbbbb44ddddddddddfff8888bbbbbbbb88fffddddddddddddddddddddddddfffff8bbbbbbbbbb888fffccccccbbbbbbbbb88888888888888888888883333333
-            33333333333333333333333333bbbbbbbbbbbb44ddddddddddffffff8bbbbbbbbfffffddddddddddddddddddddddddffffcffbbbbbbbb888fccfccccccbbbbbbbbb88888888888888888888883333333
+            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddcd33333bbbbbbb33333ddddddddccccccddddddddccdd333333bbbbbb33333dddccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbb3bbbbbb4444dddddddddc3335bbbbbbbbbb5333ddddddddccccccdddddddcccdd3355bbbbbbbbbb5533ddccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbb3bbbbbb4444ddddddddd33555bbbbbbbbbb5333ddddddddccccccdddddddccdd33355bbbbbbbbbb555333ccccccbbbbbbbbbbbbb8888888888888888888833333
+            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffbb555bbbb777bbb5bbfccdddddddddddddddddddddddbbb55bbbb7777bb555fffccccccbbbbbbbbbbbbb8888888888888888888333333
+            333333333333333333333333bbbbbbbbbbbbbb4444dddddddffff555bbbb777bbb5fffccdddddddddddddddddddddddfff55bbbb7777bb555fffccccccbbbbbbbbbbbbb8888888888888888888333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddfff5555bbbbbbbb55fffddddddddddddddddddddddddfffff5bbbbbbbbbb555fffccccccbbbbbbbbb88888888888888888888883333333
+            33333333333333333333333333bbbbbbbbbbbb44ddddddddddffffff5bbbbbbbbfffffdddddddddddddddddddddddddfffcffbbbbbbbb555fccfccccccbbbbbbbbb88888888888888888888883333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccfffffffffcccddddddddddddddddddddddddddddddcccfffffffffffcccdccccccccccdbb8888888888888888888888888333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
             3333333333333333333333333333333bbbbbbb4444ddddddddddccccccccccccccccddddddddddddddddddddddddddddddcccccccccccccccccdccccccccccdbb8888888888888888888888888333333
