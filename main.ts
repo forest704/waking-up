@@ -4533,10 +4533,15 @@ forever(function () {
     }
 })
 forever(function () {
-    if (start_rhyme == 1) {
-        tiles.setCurrentTilemap(tilemap`level6`)
-        sec = sec + 100
-        pause(rhyme * 1.5)
+	
+})
+forever(function () {
+    if (start == 0) {
+        if (start_rhyme == 1) {
+            tiles.setCurrentTilemap(tilemap`level6`)
+            sec = sec + 100
+            pause(rhyme * 1.5)
+        }
     }
 })
 forever(function () {
@@ -4645,8 +4650,5 @@ forever(function () {
     }
 })
 forever(function () {
-    if (sec < -200 || sec > 500) {
-        game.setGameOverMessage(false, "FREQUENCY DISORDER")
-        game.gameOver(false)
-    }
+	
 })
