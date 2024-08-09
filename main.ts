@@ -4771,5 +4771,8 @@ forever(function () {
     }
 })
 forever(function () {
-	
+    if (sec < -200 || sec > 500) {
+        game.setGameOverMessage(false, "FREQUENCY DISORDER")
+        game.gameOver(false)
+    }
 })
