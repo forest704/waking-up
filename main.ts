@@ -196,6 +196,9 @@ sprites.onOverlap(SpriteKind.n, SpriteKind.skin, function (sprite, otherSprite) 
     PPPP = 1
     green_light()
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function game_1 () {
     win = 1
     info.startCountdown(10)
@@ -326,6 +329,13 @@ function game_1 () {
     defend()
     _1 = 0
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (brain.y >= 80) {
+        brain.setVelocity(0, -500)
+        scene.cameraShake(2, 100)
+        sec = sec - 100
+    }
+})
 function green_light () {
     if (PPPP == 1) {
         tempo += 1
@@ -351,13 +361,6 @@ function blood_insertion () {
         }
     }
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 80) {
-        brain.setVelocity(0, -500)
-        scene.cameraShake(2, 100)
-        sec = sec - 100
-    }
-})
 function defend () {
     body2 = sprites.create(img`
         ................................................................................................................................................................
@@ -678,9 +681,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function red_light () {
     if (_0000 == 1) {
         music.play(music.createSoundEffect(WaveShape.Sine, 4871, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
@@ -836,12 +836,12 @@ let next = 0
 let game_2_drop_stop = 0
 let bouncebounce = 0
 let mouse: Sprite = null
-let sec = 0
-let brain: Sprite = null
 let oncein_game_2 = 0
 let _12 = 0
 let green: Sprite = null
 let tempo = 0
+let sec = 0
+let brain: Sprite = null
 let _1 = 0
 let PPPP = 0
 let bac: Sprite = null
