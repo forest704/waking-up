@@ -170,11 +170,11 @@ function game_2 () {
         ................................................................................................................................................................
         `)
     Z_INDEX = Z_INDEX - 2
-    win = 5
     blood_insertion()
     target.z = -600
     pause(450)
     TIME = 1
+    win = 5
     if (moving.y > 86) {
         sprites.destroy(moving)
     }
@@ -194,10 +194,6 @@ sprites.onOverlap(SpriteKind.n, SpriteKind.skin, function (sprite, otherSprite) 
     sprites.destroy(target, effects.spray, 200)
     win = 2
     PPPP = 1
-    green_light()
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
 })
 function game_1 () {
     win = 1
@@ -329,13 +325,6 @@ function game_1 () {
     defend()
     _1 = 0
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 80) {
-        brain.setVelocity(0, -500)
-        scene.cameraShake(2, 100)
-        sec = sec - 100
-    }
-})
 function green_light () {
     if (PPPP == 1) {
         tempo += 1
@@ -361,6 +350,13 @@ function blood_insertion () {
         }
     }
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (brain.y >= 80) {
+        brain.setVelocity(0, -500)
+        scene.cameraShake(2, 100)
+        sec = sec - 100
+    }
+})
 function defend () {
     body2 = sprites.create(img`
         ................................................................................................................................................................
@@ -644,7 +640,7 @@ function game3 () {
             ................................................................................................................................................................
             `)
         scroller.setLayerZIndex(scroller.BackgroundLayer.Layer2, Z_INDEX + 10)
-        pause(2000)
+        pause(1500)
         start_6666 = 1
         once = 0
         _6666 = sprites.create(img`
@@ -665,9 +661,9 @@ function game3 () {
             . . . . 3 3 3 3 3 3 3 3 . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.object)
+        win = 1
         _6666.setPosition(randint(75, 120), 30)
         _6666.setVelocity(0, randint(10, 20))
-        win = 1
         pause(8500)
         info.stopCountdown()
         result = 1
@@ -680,6 +676,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 })
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
 })
 function red_light () {
     if (_0000 == 1) {
@@ -818,7 +817,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let start2 = 0
 let _333 = 0
-let nitian = 0
 let win2 = 0
 let rhyme = 0
 let lightup = 0
@@ -836,18 +834,18 @@ let next = 0
 let game_2_drop_stop = 0
 let bouncebounce = 0
 let mouse: Sprite = null
+let sec = 0
+let brain: Sprite = null
 let oncein_game_2 = 0
 let _12 = 0
 let green: Sprite = null
 let tempo = 0
-let sec = 0
-let brain: Sprite = null
 let _1 = 0
 let PPPP = 0
 let bac: Sprite = null
 let body2: Sprite = null
-let TIME = 0
 let win = 0
+let TIME = 0
 let Z_INDEX = 0
 let target: Sprite = null
 let moving: Sprite = null
@@ -4638,6 +4636,9 @@ forever(function () {
             red_light()
         }
     }
+    if (win == 2) {
+        green_light()
+    }
 })
 forever(function () {
     if (next == 2) {
@@ -4668,7 +4669,6 @@ forever(function () {
     if (shabi == 1) {
         sprites.destroy(opening)
         start_rhyme = 1
-        nitian = 0
         shabi = 0
         TIME = 0
         game_2_drop_stop = 0
