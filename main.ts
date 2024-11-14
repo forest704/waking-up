@@ -195,6 +195,9 @@ sprites.onOverlap(SpriteKind.n, SpriteKind.skin, function (sprite, otherSprite) 
     win = 2
     PPPP = 1
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    drop()
+})
 function game_1 () {
     win = 1
     info.startCountdown(10)
@@ -325,6 +328,13 @@ function game_1 () {
     defend()
     _1 = 0
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (brain.y >= 80) {
+        sec = sec - 100
+        brain.setVelocity(0, -500)
+        scene.cameraShake(2, 100)
+    }
+})
 function green_light () {
     if (PPPP == 1) {
         tempo += 1
@@ -350,13 +360,6 @@ function blood_insertion () {
         }
     }
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (brain.y >= 80) {
-        brain.setVelocity(0, -500)
-        scene.cameraShake(2, 100)
-        sec = sec - 100
-    }
-})
 function defend () {
     body2 = sprites.create(img`
         ................................................................................................................................................................
@@ -677,9 +680,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.object, function (sprite, otherS
 info.onCountdownEnd(function () {
     info.changeCountdownBy(0.1)
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    drop()
-})
 function red_light () {
     if (_0000 == 1) {
         music.play(music.createSoundEffect(WaveShape.Sine, 4871, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
@@ -815,11 +815,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     bac.setVelocity(bounce * 1, bouncey * -1)
     pause(500)
 })
+let rhyme = 0
+let win2 = 0
+let lightup = 0
 let start2 = 0
 let _333 = 0
-let win2 = 0
-let rhyme = 0
-let lightup = 0
 let bouncey = 0
 let bounce = 0
 let OOOO = 0
@@ -834,12 +834,12 @@ let next = 0
 let game_2_drop_stop = 0
 let bouncebounce = 0
 let mouse: Sprite = null
-let sec = 0
-let brain: Sprite = null
 let oncein_game_2 = 0
 let _12 = 0
 let green: Sprite = null
 let tempo = 0
+let sec = 0
+let brain: Sprite = null
 let _1 = 0
 let PPPP = 0
 let bac: Sprite = null
@@ -3663,75 +3663,76 @@ if (start == 0) {
     )
 }
 pause(2400)
-let shabi = 1
+let once_when_start = 1
 forever(function () {
-    if (bouncebounce == 1) {
-        bounce = bac.vx
-        bouncey = bac.vy
-        if (bac.y >= 80) {
-            bac.setVelocity(bounce + 10, bouncey * -1)
-        }
-        if (bac.x >= 130 || bac.x <= 68) {
-            bac.setVelocity(bounce * -1, bouncey + 10)
-        }
-    }
-})
-forever(function () {
-    if (info.countdown() == 0.1) {
-        sprites.destroy(body2, effects.none, 100)
-        sprites.destroy(moving, effects.none, 200)
-        sprites.destroy(target, effects.none, 200)
-        sprites.destroy(bac, effects.none, 100)
-        next = next + 1
-        TIME = 1
-    }
-})
-forever(function () {
-    if (tempo == -1) {
-        brain.ay = 4000
-        lightup = 1
-        rhyme = 416.666
-        music.play(music.createSong(assets.song`bgm-1`), music.PlaybackMode.UntilDone)
-    }
-    if (tempo == 0) {
-        lightup = 1
-        rhyme = 500
-        music.play(music.createSong(assets.song`bgm0`), music.PlaybackMode.UntilDone)
+    if (once_when_start == 1) {
+        sprites.destroy(opening)
+        start_rhyme = 1
+        once_when_start = 0
+        TIME = 0
+        game_2_drop_stop = 0
+        next = 0
+        tempo = 0
+        once = 1
+        start_6666 = 0
+        _333 = 0
+        result = 0
+        bouncebounce = 0
+        _1 = 1
+        start2 = 0
+        PPPP = 0
+        _12 = 1
+        oncein_game_2 = 1
+        sec = 0
+        doddle = 0
+        OOOO = 0
+        Z_INDEX = -500
+        OOOO = 0
+        lightup = 0
+        scene.setBackgroundColor(3)
+        brain = sprites.create(img`
+            . . . . . b 9 b . . . . b 9 b . 
+            . . . . . . . . . . . . . . . . 
+            . . . 7 7 3 3 3 3 3 3 3 3 3 3 . 
+            . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
+            . . . 7 7 9 9 b b b b b b b 9 . 
+            . . . 7 7 9 b b b a a a a b b . 
+            . . . 7 7 9 b b a a b b a a b . 
+            . . . 7 7 9 b b a b 4 4 b a b . 
+            . . . 7 7 9 b b a a b b a a b . 
+            . . 7 7 9 9 b b b a a a a b b . 
+            . . 7 7 9 9 9 b b b b b b b 9 . 
+            . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
+            9 9 . f f f f f f f f f f f f 9 
+            7 7 . . . . 4 4 4 4 6 6 6 6 . 7 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 4 4 4 6 6 6 . . . 
+            `, SpriteKind.Player)
+        mouse = sprites.create(img`
+            9 9 9 9 9 9 9 . . . . . . . . . 
+            9 5 5 5 5 5 5 9 . . . . . . . . 
+            9 5 5 5 5 5 5 9 . . . . . . . . 
+            9 5 5 5 5 b b 9 . . . . . . . . 
+            9 5 5 5 5 5 9 . . . . . . . . . 
+            9 5 5 b 5 5 5 9 . . . . . . . . 
+            9 5 5 9 b 5 5 5 9 . . . . . . . 
+            9 b b 9 9 b 5 5 9 . . . . . . . 
+            . 9 9 9 . 9 b b 9 . . . . . . . 
+            . . . . . . 9 9 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Player)
+        mouse.z = 100
+        controller.moveSprite(mouse, 100, 100)
+        tiles.setCurrentTilemap(tilemap`level6`)
+        brain.setPosition(20, 50)
         brain.ay = 3500
-    }
-    if (tempo == 1) {
-        lightup = 1
-        rhyme = 666.66666
-        music.play(music.createSong(assets.song`bgm1`), music.PlaybackMode.UntilDone)
-        brain.ay = 2500
-    }
-    if (tempo == 2) {
-        lightup = 1
-        rhyme = 750
-        music.play(music.createSong(assets.song`bgm2`), music.PlaybackMode.UntilDone)
-        brain.ay = 2000
-    }
-    if (tempo == 3) {
-        lightup = 1
-        rhyme = 833.333
-        music.play(music.createSong(assets.song`bgm3`), music.PlaybackMode.UntilDone)
-        brain.ay = 1000
-    }
-})
-forever(function () {
-    if (tempo < -1) {
-        game.setGameOverMessage(false, "LOW FREQUENCY")
-        game.gameOver(false)
-    }
-    if (tempo >= 3) {
-        start = 10
-        shabi = 0
-    }
-    if (result == 1) {
-        if (tempo < 3) {
-            game.setGameOverMessage(false, "NOT ACTIVATED")
-            game.gameOver(false)
-        }
+        info.startCountdown(5)
+        start2 = 1
     }
 })
 forever(function () {
@@ -4617,10 +4618,52 @@ forever(function () {
     }
 })
 forever(function () {
+    if (start2 == 1) {
+        if (_1 == 1) {
+            game_1()
+        }
+    }
+})
+forever(function () {
     if (next == 1) {
         if (_12 == 1) {
             game_2()
             win2 = 0
+        }
+    }
+})
+forever(function () {
+    if (next == 2) {
+        game3()
+    }
+})
+forever(function () {
+    if (start_6666 == 1) {
+        if (_6666.y > 88) {
+            _6666.setPosition(randint(75, 120), 30)
+            _6666.setVelocity(0, randint(50, 60))
+        }
+    }
+})
+forever(function () {
+    if (start == 0) {
+        if (start_rhyme == 1) {
+            tiles.setCurrentTilemap(tilemap`level6`)
+            sec = sec + 100
+            pause(rhyme * 1.5)
+        }
+    }
+})
+forever(function () {
+    if (doddle == 1) {
+        if (mouse.x < 70) {
+            mouse.setPosition(120, mouse.y)
+        }
+        if (mouse.x > 130) {
+            mouse.setPosition(80, mouse.y)
+        }
+        if (mouse.y > 95) {
+            mouse.setPosition(mouse.x, 56)
         }
     }
 })
@@ -4641,119 +4684,31 @@ forever(function () {
     }
 })
 forever(function () {
-    if (next == 2) {
-        game3()
-    }
-})
-forever(function () {
-    if (start_6666 == 1) {
-        if (_6666.y > 88) {
-            _6666.setPosition(randint(75, 120), 30)
-            _6666.setVelocity(0, randint(50, 60))
+    if (bouncebounce == 1) {
+        bounce = bac.vx
+        bouncey = bac.vy
+        if (bac.y >= 80) {
+            bac.setVelocity(bounce + 10, bouncey * -1)
+        }
+        if (bac.x >= 130 || bac.x <= 68) {
+            bac.setVelocity(bounce * -1, bouncey + 10)
         }
     }
 })
 forever(function () {
-	
-})
-forever(function () {
-    if (start == 0) {
-        if (start_rhyme == 1) {
-            tiles.setCurrentTilemap(tilemap`level6`)
-            sec = sec + 100
-            pause(rhyme * 1.5)
-        }
+    if (game_2_drop_stop == 1) {
+        moving.vx = 0
+        moving.ay = 300
     }
 })
 forever(function () {
-    if (shabi == 1) {
-        sprites.destroy(opening)
-        start_rhyme = 1
-        shabi = 0
-        TIME = 0
-        game_2_drop_stop = 0
-        next = 0
-        tempo = 0
-        once = 1
-        start_6666 = 0
-        _333 = 0
-        result = 0
-        bouncebounce = 0
-        _1 = 1
-        start2 = 0
-        PPPP = 0
-        _12 = 1
-        oncein_game_2 = 1
-        sec = 50
-        doddle = 0
-        OOOO = 0
-        Z_INDEX = -500
-        OOOO = 0
-        lightup = 0
-        scene.setBackgroundColor(3)
-        brain = sprites.create(img`
-            . . . . . b 9 b . . . . b 9 b . 
-            . . . . . . . . . . . . . . . . 
-            . . . 7 7 3 3 3 3 3 3 3 3 3 3 . 
-            . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
-            . . . 7 7 9 9 b b b b b b b 9 . 
-            . . . 7 7 9 b b b a a a a b b . 
-            . . . 7 7 9 b b a a b b a a b . 
-            . . . 7 7 9 b b a b 4 4 b a b . 
-            . . . 7 7 9 b b a a b b a a b . 
-            . . 7 7 9 9 b b b a a a a b b . 
-            . . 7 7 9 9 9 b b b b b b b 9 . 
-            . . . 7 7 9 9 9 9 9 9 9 9 9 9 . 
-            9 9 . f f f f f f f f f f f f 9 
-            7 7 . . . . 4 4 4 4 6 6 6 6 . 7 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 4 4 4 6 6 6 . . . 
-            `, SpriteKind.Player)
-        mouse = sprites.create(img`
-            9 9 9 9 9 9 9 . . . . . . . . . 
-            9 5 5 5 5 5 5 9 . . . . . . . . 
-            9 5 5 5 5 5 5 9 . . . . . . . . 
-            9 5 5 5 5 b b 9 . . . . . . . . 
-            9 5 5 5 5 5 9 . . . . . . . . . 
-            9 5 5 b 5 5 5 9 . . . . . . . . 
-            9 5 5 9 b 5 5 5 9 . . . . . . . 
-            9 b b 9 9 b 5 5 9 . . . . . . . 
-            . 9 9 9 . 9 b b 9 . . . . . . . 
-            . . . . . . 9 9 . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Player)
-        mouse.z = 100
-        controller.moveSprite(mouse, 100, 100)
-        tiles.setCurrentTilemap(tilemap`level6`)
-        brain.setPosition(20, 50)
-        brain.ay = 3500
-        info.startCountdown(5)
-        start2 = 1
-    }
-})
-forever(function () {
-    if (doddle == 1) {
-        if (mouse.x < 70) {
-            mouse.setPosition(120, mouse.y)
-        }
-        if (mouse.x > 130) {
-            mouse.setPosition(80, mouse.y)
-        }
-        if (mouse.y > 95) {
-            mouse.setPosition(mouse.x, 56)
-        }
-    }
-})
-forever(function () {
-    if (start2 == 1) {
-        if (_1 == 1) {
-            game_1()
-        }
+    if (info.countdown() == 0.1) {
+        sprites.destroy(body2, effects.none, 100)
+        sprites.destroy(moving, effects.none, 200)
+        sprites.destroy(target, effects.none, 200)
+        sprites.destroy(bac, effects.none, 100)
+        next = next + 1
+        TIME = 1
     }
 })
 forever(function () {
@@ -4765,13 +4720,55 @@ forever(function () {
     }
 })
 forever(function () {
-    if (game_2_drop_stop == 1) {
-        moving.vx = 0
-        moving.ay = 300
+    if (tempo == -1) {
+        brain.ay = 4000
+        lightup = 1
+        rhyme = 416.666
+        music.play(music.createSong(assets.song`bgm0`), music.PlaybackMode.UntilDone)
+    }
+    if (tempo == 0) {
+        lightup = 1
+        rhyme = 500
+        music.play(music.createSong(assets.song`bgm-1`), music.PlaybackMode.UntilDone)
+        brain.ay = 3500
+    }
+    if (tempo == 1) {
+        lightup = 1
+        rhyme = 666.66666
+        music.play(music.createSong(assets.song`bgm1`), music.PlaybackMode.UntilDone)
+        brain.ay = 2500
+    }
+    if (tempo == 2) {
+        lightup = 1
+        rhyme = 750
+        music.play(music.createSong(assets.song`bgm2`), music.PlaybackMode.UntilDone)
+        brain.ay = 2000
+    }
+    if (tempo == 3) {
+        lightup = 1
+        rhyme = 833.333
+        music.play(music.createSong(assets.song`bgm3`), music.PlaybackMode.UntilDone)
+        brain.ay = 1000
     }
 })
 forever(function () {
-    if (sec < -200 || sec > 500) {
+    if (tempo < -1) {
+        game.setGameOverMessage(false, "LOW FREQUENCY")
+        game.gameOver(false)
+    }
+    if (tempo >= 3) {
+        start = 10
+        once_when_start = 0
+    }
+    if (result == 1) {
+        if (tempo < 3) {
+            game.setGameOverMessage(false, "NOT ACTIVATED")
+            game.gameOver(false)
+        }
+    }
+})
+forever(function () {
+    if (sec < -500 || sec > 500) {
         game.setGameOverMessage(false, "FREQUENCY DISORDER")
         game.gameOver(false)
     }
