@@ -4684,7 +4684,7 @@ forever(function () {
         PPPP = 0
         _12 = 1
         oncein_game_2 = 1
-        sec = 50
+        sec = 0
         doddle = 0
         OOOO = 0
         Z_INDEX = -500
@@ -4771,7 +4771,7 @@ forever(function () {
     }
 })
 forever(function () {
-    if (sec < -200 || sec > 500) {
+    if (sec < -500 || sec > 500) {
         game.setGameOverMessage(false, "FREQUENCY DISORDER")
         game.gameOver(false)
     }
