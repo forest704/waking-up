@@ -819,6 +819,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let start2 = 0
 let _333 = 0
 let nitian = 0
+let start_rhyme = 0
 let win2 = 0
 let rhyme = 0
 let lightup = 0
@@ -853,7 +854,6 @@ let target: Sprite = null
 let moving: Sprite = null
 let opening: Sprite = null
 let start = 0
-let start_rhyme = 0
 if (start == 0) {
     opening = sprites.create(img`
         . . . . . . . . . . . . . . . . 

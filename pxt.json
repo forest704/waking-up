@@ -1,5 +1,5 @@
 {
-    "name": "waking up",
+    "name": "Waking Up",
     "version": "1.2.1",
     "description": "",
     "dependencies": {
@@ -27,14 +27,14 @@
         "branch": "v1.12.55",
         "tag": "v1.12.55",
         "commits": "https://github.com/microsoft/pxt-arcade/commits/0b8917880a46a30b0f35218153e52853fa47e114",
-        "target": "1.12.57",
+        "target": "2.0.57",
         "pxt": "8.5.66",
         "targetId": "arcade"
     },
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "palette": [
         "#000000",
         "#0242F3",
